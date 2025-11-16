@@ -4,7 +4,7 @@ import {useGameLogic} from "./hooks/useGameLogic.ts";
 
 
 const cardValues: Array<string> = [
-    "🦆","🐮","🐷","5",
+    "🦆","🐮","🐷","🐯",
     "🦁","🐒","🦊","🐺",
     "🦆","🐮","🐷","🐯",
     "🦁","🐒","🦊","🐺",
