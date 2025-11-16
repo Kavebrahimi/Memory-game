@@ -43,6 +43,7 @@ header {
     font-size: 1.8rem;
 }
 
+/* Card grid container */
 .cards-grid {
     margin-top: 1.5rem;
     display: grid;
@@ -54,6 +55,7 @@ header {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 }
 
+/* Card (3D container) */
 .card {
     perspective: 1000px;
     display: flex;
@@ -68,10 +70,19 @@ header {
     border: 2px solid rgba(255, 255, 255, 0.29);
     background-color: #252573;
     cursor: pointer;
+
+    /* Important for consistent 3D on mobile */
+    -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
+
+    /* hint to compositor / GPU to avoid emoji render glitches */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+
     transition: transform 0.6s ease;
 }
 
+/* Faces */
 .card-front,
 .card-back {
     position: absolute;
@@ -80,16 +91,32 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    /* hide the back of each face */
+    -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+
+    /* ensure faces participate in 3D rendering and get their own layer */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+
     font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
     transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
+/* Rotate the back face so it appears correctly after the container is flipped */
 .card-back {
+    /* canonical flip technique: rotate the back 180deg */
+    -webkit-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+
+    /* start hidden (opacity) — container rotation will reveal it */
     opacity: 0;
 }
 
+/* Flipped state rotates the whole card */
 .card.flipped {
+    -webkit-transform: rotateY(180deg);
     transform: rotateY(180deg);
 }
 
@@ -102,6 +129,7 @@ header {
     opacity: 1;
 }
 
+/* Matched visual */
 .card.matched {
     background-color: rgba(34, 255, 0, 0.32);
     border-color: #56b200;
