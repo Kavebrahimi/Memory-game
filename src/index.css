@@ -1,0 +1,129 @@
+@import "@picocss/pico/css/pico.css";
+
+body{
+    padding: 3rem 1rem;
+}
+h1{
+    text-align: center;
+    font-size: clamp(1rem ,5vw, 2rem)
+}
+header {
+    padding: 2rem;
+    background: #1b202c;
+    margin-top: 2rem;
+    border-radius: 1em;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+.inner-container{
+    max-width: 500px;
+    margin: 0 auto;
+}
+.stats{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    margin-top: 2rem;
+}
+.stat-item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .3rem;
+    font-weight: bold;
+    color: #5252ff;
+}
+.stat-value {
+    font-size: 1.8rem;
+}
+.cards-grid{
+    margin-top: 1.5rem;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 1rem;
+    background-color: #1b202c;
+    border-radius: 1em;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+.card{
+    perspective: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 100px;
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.8rem;
+    border-radius: .8rem;
+    border: 2px solid rgba(255, 255, 255, 0.29);
+    background-color: #252573;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: all .6s ease;
+}
+.card-front{
+    backface-visibility: hidden;
+    position: absolute;
+    inset: 0;
+    padding: 1rem;
+    transition: opacity .6s ease, transform .3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.card.flipped{
+    transform: rotateY(180deg);
+}
+.card.flipped .card-front {
+    opacity: 0 ;
+    pointer-events: none;
+}
+.card.flipped .card-back{
+    opacity: 1;
+}
+.card-back{
+    position: absolute;
+    backface-visibility: hidden;
+    opacity: 0;
+    inset: 0;
+    padding: 1rem;
+    transition: opacity .6s ease, transform .3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.card.matched {
+    background-color: rgba(34, 255, 0, 0.32);
+    border-color: #56b200;
+    box-shadow: 0 0 10px #56b200;
+}
+.game-over{
+    opacity:0;
+    max-height:0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 1em 0;
+    transition: max-height .6s, opacity .6s ease;
+}
+.game-over.show {
+    opacity:1;
+    max-height:300px;
+}
+.github{
+    margin: 2rem 0;
+    text-align: center;
+}
+@media screen and (max-width: 500px) {
+    body{
+        font-size: 15px;
+    }
+    .card {
+        font-size: 1.6rem;
+        height: 70px;
+    }
+}
